@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="https://apps-ut.isvcs.net/ebci/iica/edes/services/DirectDepositService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://www.cra-arc.gc.ca/xmlns/edes/dd/1-0-0" xmlns:impl="https://apps-ut.isvcs.net/ebci/iica/edes/services/DirectDepositService" targetNamespace="https://apps-ut.isvcs.net/ebci/iica/edes/services/DirectDepositService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns:core="http://www.cra-arc.gc.ca/xmlns/core/1-0-0" xmlns:sdt="http://www.cra-arc.gc.ca/xmlns/sdt/2-2-0" xmlns:edes="http://www.cra-arc.gc.ca/xmlns/edes/dd/1-0-0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cra-arc.gc.ca/xmlns/edes/dd/1-0-0" version="edes/1-0-0">
+      <xsd:import namespace="http://www.cra-arc.gc.ca/xmlns/sdt/2-2-0" />
+      <xsd:import namespace="http://www.cra-arc.gc.ca/xmlns/core/1-0-0" />
+      <xsd:element name="RetrieveDirectDepositRequest" type="edes:RetrieveDirectDepositRequestType" />
+      <xsd:complexType name="RetrieveDirectDepositRequestType">
+        <xsd:sequence>
+          <xsd:element ref="core:MessageManifest" />
+          <xsd:element name="DataArea" type="edes:RetrieveBankAccountRequestDataAreaType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RetrieveBankAccountRequestDataAreaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" ref="edes:SocialInsuranceNumber" />
+          <xsd:element minOccurs="1" maxOccurs="1" ref="edes:BirthDate" />
+          <xsd:element minOccurs="1" maxOccurs="1" ref="edes:Surname" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="edes:Channel" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="edes:Program" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="edes:ConsentVersion" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RetrieveDirectDepositResponse" type="edes:RetrieveDirectDepositResponseType" />
+      <xsd:complexType name="RetrieveDirectDepositResponseType">
+        <xsd:sequence>
+          <xsd:element name="DataArea" type="edes:RetrieveBankAccountResponseDataAreaType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RetrieveBankAccountResponseDataAreaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="BankAccount" type="edes:BankAccount" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Status" type="edes:Status" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="UpdateDirectDepositRequest" type="edes:UpdateDirectDepositRequestType" />
+      <xsd:complexType name="UpdateDirectDepositRequestType">
+        <xsd:sequence>
+          <xsd:element ref="core:MessageManifest" />
+          <xsd:element name="DataArea" type="edes:UpdateBankAccountRequestDataAreaType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UpdateBankAccountRequestDataAreaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" ref="edes:SocialInsuranceNumber" />
+          <xsd:element minOccurs="1" maxOccurs="1" ref="edes:BirthDate" />
+          <xsd:element minOccurs="1" maxOccurs="1" ref="edes:Surname" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="edes:Channel" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="edes:Program" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="edes:ConsentVersion" />
+          <xsd:element minOccurs="1" name="BankAccount" type="edes:BankAccount" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="UpdateDirectDepositResponse" type="edes:UpdateDirectDepositResponseType" />
+      <xsd:complexType name="UpdateDirectDepositResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Status" type="edes:Status" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BankAccount">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" ref="edes:Transit" />
+          <xsd:element minOccurs="1" ref="edes:AccountNumber" />
+          <xsd:element minOccurs="1" ref="edes:Institution" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="DirectDepositAppliedStatusRequest" type="edes:DirectDepositAppliedStatusRequestType" />
+      <xsd:complexType name="DirectDepositAppliedStatusRequestType">
+        <xsd:sequence>
+          <xsd:element ref="core:MessageManifest" />
+          <xsd:element name="DataArea" type="edes:DirectDepositAppliedStatusRequestDataAreaType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DirectDepositAppliedStatusRequestDataAreaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" ref="edes:SocialInsuranceNumber" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="edes:Program" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Status" type="edes:Status" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="FormattedDateTimeType">
+        <xsd:annotation>
+          <xsd:documentation>This is formatted representation of a date, which may be specified as a
+        date, date/time, year, or year/month.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:union memberTypes="xsd:date xsd:dateTime xsd:gYearMonth xsd:gYear" />
+      </xsd:simpleType>
+      <xsd:simpleType name="SocialInsuranceNumberType">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9]{9}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="SurnameType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="BirthDate" type="edes:BirthDateFormatType" />
+      <xsd:simpleType name="BirthDateFormatType">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="\d{4}-\d{2}-\d{2}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Transit" type="edes:TransitType" />
+      <xsd:simpleType name="TransitType">
+        <xsd:restriction base="xsd:int">
+          <xsd:pattern value="[0-9]{1,5}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="AccountNumber" type="edes:AccountNumberType" />
+      <xsd:simpleType name="AccountNumberType">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9]{1,12}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Institution" type="edes:InstitutionType" />
+      <xsd:simpleType name="InstitutionType">
+        <xsd:restriction base="xsd:int">
+          <xsd:pattern value="[0-9]{1,3}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="SocialInsuranceNumber" type="edes:SocialInsuranceNumberType">
+        <xsd:annotation>
+          <xsd:documentation>Social Insurance Number. - maximum length 9 characters - minimum length 9
+        characters - no white spaces</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Surname" type="edes:SurnameType">
+        <xsd:annotation>
+          <xsd:documentation>Contains a non-given name. This is an inherited name or one representing a
+        family relationship or in some cultural contexts a "Place Name"(where someone is from). In
+        some cultural contexts, a single family name is typical, while in others there may be
+        multiple family names. A "primary"attribute may be used in the case where there are
+        multiple last names. A family name can have a "prefix,"such as Von, De, Van, Al, etc. These
+        can be represented using the FamilyName "prefix"attribute. Not all implementers may find it
+        necessary to separate prefixes from the family name itself. Capturing the prefix and
+        FamilyName as discrete fields can become important when formatting or appearance may vary
+        based on context. For example, in some cultural contexts it may be common to use a blank
+        space as the delimiter between the prefix and the family name, while in others a hyphen
+        might be used. Separating the prefix from FamilyName allows such formatting requirements to
+        be handled flexibly.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ProcessingStatus">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Accepted" />
+            <xsd:enumeration value="Rejected" />
+            <xsd:enumeration value="Applied" />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Channel" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Identifies the source of the business transaction. IE Online, Agent,
+        ......</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Program" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Identifies a departmental program. edesP, EI, etc...</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ConsentVersion" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Identifies The version of the consent being agreed to</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="RejectedReasonCode">
+        <xsd:annotation>
+          <xsd:documentation>Identifies the reason why data was rejected</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10" />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:complexType name="Status">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" ref="edes:ProcessingStatus" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="edes:RejectedReasonCode" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns:core="http://www.cra-arc.gc.ca/xmlns/core/1-0-0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cra-arc.gc.ca/xmlns/core/1-0-0" version="1-0-0">
+      <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+      <xsd:element name="MessageManifest" type="core:MessageManifestType" />
+      <xsd:complexType name="MessageManifestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" name="MessageDateTime" type="core:DateTimeST">
+            <xsd:annotation>
+              <xsd:documentation>The date and time a specific message was sent for processed. This is a enterprise message system layer specific field and should not be populated by the client.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="MessageID" type="core:NotificationIDCT">
+            <xsd:annotation>
+              <xsd:documentation>This field holds a unique identifier for a given message. This field is used to consistently identify messages between the enterprise messageing system and partners.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="TechnicalTransactionDateTime" type="core:DateTimeST">
+            <xsd:annotation>
+              <xsd:documentation>The timestamp associated with a unique technical transaction instance of a message</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="TechnicalTransactionID" type="core:NotificationIDCT">
+            <xsd:annotation>
+              <xsd:documentation>A unique identifier (UUID format) representing a traceable instance of a technical transaction from the
+            originator across the entire life cycle of the transaction. This ID can be used to consistently
+            trace a message across all hops of the transaction life cycle.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="BusinessTransactionDateTime" type="core:DateTimeST">
+            <xsd:annotation>
+              <xsd:documentation>The timestamp associated with a unique business transaction instance of a message</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="BusinessTransactionID" type="core:NotificationIDCT">
+            <xsd:annotation>
+              <xsd:documentation>A unique identifier (UUID format) representing a traceable instance of a business transaction from
+            the originator across the entire life cycle of the transaction. This ID is used to identify unique
+            business transaction (Idempotence). It is primarily used to identify duplicate transactions.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="SystemID" type="core:SystemIDCT">
+            <xsd:annotation>
+              <xsd:documentation>This value should contain a unique identifier for the partner submitting the Message. This name is identified in the Service Implementation Details agreement.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" default="false" name="TestIndicator" type="core:IndicatorST">
+            <xsd:annotation>
+              <xsd:documentation>This value indicates that the message was a test message. If the value is set to true the message will not be processed any further. Primarily used for conectivity testing.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="LanguageCode" type="core:LanguageCodeCT">
+            <xsd:annotation>
+              <xsd:documentation>This value identifies the language which the message published in which in tun identifies what language a response is expected in.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="DateTimeST">
+        <xsd:annotation>
+          <xsd:documentation>ISO 8601 format: YYYY-MM-DDThh:mm:ss</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:dateTime" />
+      </xsd:simpleType>
+      <xsd:simpleType name="DateST">
+        <xsd:annotation>
+          <xsd:documentation>ISO 8601 format: YYYY-MM-DD</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:date" />
+      </xsd:simpleType>
+      <xsd:complexType name="NotificationIDCT">
+        <xsd:simpleContent>
+          <xsd:extension base="core:NotificationIDST" />
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="NotificationIDST">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="100" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="UUIDST">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">Universally Unique Identifier</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:length value="36" />
+          <xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="UUIDCT">
+        <xsd:simpleContent>
+          <xsd:extension base="core:UUIDST" />
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="LanguageCodeST">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="LanguageCodeCT">
+        <xsd:simpleContent>
+          <xsd:extension base="core:LanguageCodeST" />
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="SystemIDCT">
+        <xsd:simpleContent>
+          <xsd:extension base="core:SystemIDST" />
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="SystemIDST">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="IndicatorST">
+        <xsd:restriction base="xsd:boolean">
+          <xsd:pattern value="false" />
+          <xsd:pattern value="true" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Fault" type="core:Fault" />
+      <xsd:complexType name="Fault" final="extension">
+        <xsd:annotation>
+          <xsd:documentation>Fault reporting structure</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="faultcode" type="xsd:QName" />
+          <xsd:element name="faultstring" type="xsd:string" />
+          <xsd:element minOccurs="0" name="faultactor" type="xsd:anyURI" />
+          <xsd:element minOccurs="0" name="detail" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema targetNamespace="http://www.w3.org/XML/1998/namespace" xml:lang="en">
+      <xsd:annotation>
+        <xsd:documentation>See http://www.w3.org/XML/1998/namespace.html and http://www.w3.org/TR/REC-xml for information about this namespace. This schema document describes the XML namespace, in a form suitable for import by other schema documents. Note that local names in this namespace are intended to be defined only by the World Wide Web Consortium or its subgroups. The following names are currently defined in this namespace and should not be used with conflicting semantics by any Working Group, specification, or document instance: base (as an attribute name): denotes an attribute whose value provides a URI to be used as the base for interpreting any relative URIs in the scope of the element on which it appears; its value is inherited. This name is reserved by virtue of its definition in the XML Base specification. id (as an attribute name): denotes an attribute whose value should be interpreted as if declared to be of type ID. This name is reserved by virtue of its definition in the xml:id specification. lang (as an attribute name): denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification. space (as an attribute name): denotes an attribute whose value is a keyword indicating what whitespace processing discipline is intended for the 	content of the element; its value is inherited. This name is reserved by virtue of its definition in the XML specification. Father (in any context at all): denotes Jon Bosak, the chair of the original XML Working Group. This name is reserved by the following decision of the W3C XML Plenary and XML Coordination groups: In appreciation for his vision, leadership and dedication the W3C XML Plenary on this 10th day of February, 2000 reserves for Jon Bosak in perpetuity the XML name xml:Father</xsd:documentation>
+      </xsd:annotation>
+      <xsd:annotation>
+        <xsd:documentation>In keeping with the XML Schema WG's standard versioning policy, this schema document will persist at http://www.w3.org/2007/08/CRA_xml.xsd. At the date of issue it can also be found at http://www.w3.org/2001/xml.xsd. The schema document at that URI may however change in the future, in order to remain compatible with the latest version of XML Schema itself, or with the XML namespace itself. In other words, if the XML Schema or XML namespaces change, the version of this document at http://www.w3.org/2001/xml.xsd will change accordingly; the version at http://www.w3.org/2007/08/xml.xsd will not change.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:attribute name="lang">
+        <xsd:annotation>
+          <xsd:documentation>Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility. See RFC 3066 at http://www.ietf.org/rfc/rfc3066.txt and the IANA registry at http://www.iana.org/assignments/lang-tag-apps.htm for further information. The union allows for the 'un-declaration'of xml:lang with the empty string.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:union memberTypes="xsd:language">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:union>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="space">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:NCName">
+            <xsd:enumeration value="default" />
+            <xsd:enumeration value="preserve" />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="base" type="xsd:anyURI">
+        <xsd:annotation>
+          <xsd:documentation>See http://www.w3.org/TR/xmlbase/ for information about this attribute.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="id" type="xsd:ID">
+        <xsd:annotation>
+          <xsd:documentation>See http://www.w3.org/TR/xml-id/ for information about this attribute.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attributeGroup name="specialAttrs">
+        <xsd:attribute ref="xml:base" />
+        <xsd:attribute ref="xml:lang" />
+        <xsd:attribute ref="xml:space" />
+        <xsd:attribute ref="xml:id" />
+      </xsd:attributeGroup>
+    </xsd:schema>
+    <xsd:schema xmlns:sdt="http://www.cra-arc.gc.ca/xmlns/sdt/2-2-0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.cra-arc.gc.ca/xmlns/sdt/2-2-0" version="2-2-0">
+      <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+      <xsd:simpleType name="AmountDollarsOnlyType">
+        <xsd:restriction base="xsd:integer" />
+      </xsd:simpleType>
+      <xsd:simpleType name="AmountType">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="AreaType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="BinaryObjectType">
+        <xsd:restriction base="xsd:base64Binary" />
+      </xsd:simpleType>
+      <xsd:simpleType name="CodeType">
+        <xsd:restriction base="xsd:token" />
+      </xsd:simpleType>
+      <xsd:simpleType name="CountType">
+        <xsd:restriction base="xsd:integer" />
+      </xsd:simpleType>
+      <xsd:simpleType name="DateType">
+        <xsd:restriction base="xsd:date" />
+      </xsd:simpleType>
+      <xsd:simpleType name="DateTimeType">
+        <xsd:restriction base="xsd:dateTime" />
+      </xsd:simpleType>
+      <xsd:simpleType name="DayType">
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+          <xsd:enumeration value="03" />
+          <xsd:enumeration value="04" />
+          <xsd:enumeration value="05" />
+          <xsd:enumeration value="06" />
+          <xsd:enumeration value="07" />
+          <xsd:enumeration value="08" />
+          <xsd:enumeration value="09" />
+          <xsd:enumeration value="10" />
+          <xsd:enumeration value="11" />
+          <xsd:enumeration value="12" />
+          <xsd:enumeration value="13" />
+          <xsd:enumeration value="14" />
+          <xsd:enumeration value="15" />
+          <xsd:enumeration value="16" />
+          <xsd:enumeration value="17" />
+          <xsd:enumeration value="18" />
+          <xsd:enumeration value="19" />
+          <xsd:enumeration value="20" />
+          <xsd:enumeration value="21" />
+          <xsd:enumeration value="22" />
+          <xsd:enumeration value="23" />
+          <xsd:enumeration value="24" />
+          <xsd:enumeration value="25" />
+          <xsd:enumeration value="26" />
+          <xsd:enumeration value="27" />
+          <xsd:enumeration value="28" />
+          <xsd:enumeration value="29" />
+          <xsd:enumeration value="30" />
+          <xsd:enumeration value="31" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="DepthType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:complexType name="DescriptionType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:string">
+            <xsd:attribute ref="xml:lang" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="DistanceType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="DurationType">
+        <xsd:restriction base="xsd:duration" />
+      </xsd:simpleType>
+      <xsd:simpleType name="GraphicType">
+        <xsd:restriction base="xsd:base64Binary" />
+      </xsd:simpleType>
+      <xsd:simpleType name="IDType">
+        <xsd:restriction base="xsd:token" />
+      </xsd:simpleType>
+      <xsd:simpleType name="ImageType">
+        <xsd:restriction base="xsd:base64Binary" />
+      </xsd:simpleType>
+      <xsd:simpleType name="IndicatorType">
+        <xsd:restriction base="xsd:boolean" />
+      </xsd:simpleType>
+      <xsd:simpleType name="HeightType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="LengthType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="MeasureType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:complexType name="MessageType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:string">
+            <xsd:attribute ref="xml:lang" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="MonthType">
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+          <xsd:enumeration value="03" />
+          <xsd:enumeration value="04" />
+          <xsd:enumeration value="05" />
+          <xsd:enumeration value="06" />
+          <xsd:enumeration value="07" />
+          <xsd:enumeration value="08" />
+          <xsd:enumeration value="09" />
+          <xsd:enumeration value="10" />
+          <xsd:enumeration value="11" />
+          <xsd:enumeration value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="NameType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:string">
+            <xsd:attribute ref="xml:lang" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="NumberType">
+        <xsd:restriction base="xsd:token" />
+      </xsd:simpleType>
+      <xsd:simpleType name="PercentType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="PictureType">
+        <xsd:restriction base="xsd:base64Binary" />
+      </xsd:simpleType>
+      <xsd:simpleType name="QuantityType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="RateType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="RatioType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="ScoreType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="SequenceNumberType">
+        <xsd:restriction base="xsd:unsignedInt" />
+      </xsd:simpleType>
+      <xsd:simpleType name="SimpleTextType">
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="SoundType">
+        <xsd:restriction base="xsd:base64Binary" />
+      </xsd:simpleType>
+      <xsd:complexType name="TextType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:string">
+            <xsd:attribute ref="xml:lang" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="TimeType">
+        <xsd:restriction base="xsd:time" />
+      </xsd:simpleType>
+      <xsd:complexType name="TitleType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:string">
+            <xsd:attribute ref="xml:lang" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="TokenMessageType">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:token">
+            <xsd:attribute ref="xml:lang" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="URIType">
+        <xsd:restriction base="xsd:anyURI" />
+      </xsd:simpleType>
+      <xsd:simpleType name="ValueType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="VideoType">
+        <xsd:restriction base="xsd:base64Binary" />
+      </xsd:simpleType>
+      <xsd:simpleType name="VolumeType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="WeightType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="WidthType">
+        <xsd:restriction base="xsd:decimal" />
+      </xsd:simpleType>
+      <xsd:simpleType name="YearType">
+        <xsd:restriction base="xsd:gYear">
+          <xsd:pattern value="[0-9]{4}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="YearMonthType">
+        <xsd:restriction base="xsd:gYearMonth" />
+      </xsd:simpleType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UpdateDirectDepositRequestRequest">
+    <wsdl:part name="part" element="tns1:UpdateDirectDepositRequest" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDirectDepositRequestResponse">
+    <wsdl:part name="UpdateDirectDepositResponse" element="tns1:UpdateDirectDepositResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveDirectDepositRequestRequest">
+    <wsdl:part name="part" element="tns1:RetrieveDirectDepositRequest" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveDirectDepositRequestResponse">
+    <wsdl:part name="RetrieveDirectDepositResponse" element="tns1:RetrieveDirectDepositResponse" />
+  </wsdl:message>
+  <wsdl:message name="DirectDepositAppliedStatusRequestRequest">
+    <wsdl:part name="part" element="tns1:DirectDepositAppliedStatusRequest" />
+  </wsdl:message>
+  <wsdl:message name="RuntimeFaultMessage">
+    <wsdl:part name="code" type="xsd:string" />
+    <wsdl:part name="summary" type="xsd:string" />
+    <wsdl:part name="detail" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="DirectDepositSOAPImpl">
+    <wsdl:operation name="UpdateDirectDepositRequest">
+      <wsdl:input name="UpdateDirectDepositRequestRequest" message="impl:UpdateDirectDepositRequestRequest" />
+      <wsdl:output name="UpdateDirectDepositRequestResponse" message="impl:UpdateDirectDepositRequestResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveDirectDepositRequest">
+      <wsdl:input name="RetrieveDirectDepositRequestRequest" message="impl:RetrieveDirectDepositRequestRequest" />
+      <wsdl:output name="RetrieveDirectDepositRequestResponse" message="impl:RetrieveDirectDepositRequestResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DirectDepositServiceSoapBinding" type="impl:DirectDepositSOAPImpl">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UpdateDirectDepositRequest">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="UpdateDirectDepositRequestRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateDirectDepositRequestResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveDirectDepositRequest">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RetrieveDirectDepositRequestRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RetrieveDirectDepositRequestResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="stub_client_ep">
+    <wsdl:port name="DirectDepositSOAPImpl_pt" binding="impl:DirectDepositServiceSoapBinding">
+      <wsdlsoap:address location="http://int12cm.brz.dev:7021/soa-infra/services/default/SyncStub/stub_client_ep" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

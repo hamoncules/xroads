@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WL5G3N2:definitions xmlns:WL5G3N3="http://interoperability.gc.ca/entity/citizenprofile/1.0" xmlns:WL5G3N5="http://interoperability.gc.ca/service/citizenprofile/1.0" xmlns:WL5G3N0="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:WL5G3N4="http://interoperability.gc.ca/core/1.0" xmlns:WL5G3N1="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:WL5G3N6="http://schemas.xmlsoap.org/wsdl/soap/" name="OperationSplitter" targetNamespace="http://interoperability.gc.ca/service/citizenprofile/1.0" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/">
+  <WL5G3N0:Policy WL5G3N1:Id="wss_username_token_service_policy">
+    <sp:SupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+      <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+          <wsp:Policy>
+            <sp:WssUsernameToken10 />
+          </wsp:Policy>
+        </sp:UsernameToken>
+      </wsp:Policy>
+    </sp:SupportingTokens>
+  </WL5G3N0:Policy>
+  <WL5G3N2:types>
+    <xsd:schema xmlns:core="http://interoperability.gc.ca/core/1.0" xmlns:cp="http://interoperability.gc.ca/entity/citizenprofile/1.0" elementFormDefault="qualified" targetNamespace="http://interoperability.gc.ca/entity/citizenprofile/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://interoperability.gc.ca/core/1.0" />
+      <xsd:element name="RetrieveBankAccountBySINRequest" type="cp:RetrieveBankAccountBySINRequestType" />
+      <xsd:complexType name="RetrieveBankAccountBySINRequestType">
+        <xsd:sequence>
+          <xsd:element ref="core:MessageManifest" />
+          <xsd:element name="DataArea" type="cp:RetrieveBankAccountBySINRequestDataAreaType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RetrieveBankAccountBySINRequestDataAreaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" ref="cp:SocialInsuranceNumber" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:BirthDate" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Surname" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Channel" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Program" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:SharingAgreementID" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RetrieveBankAccountBySINResponse" type="cp:RetrieveBankAccountBySINResponseType" />
+      <xsd:complexType name="RetrieveBankAccountBySINResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" ref="core:MessageManifest" />
+          <xsd:choice>
+            <xsd:element name="DataArea" type="cp:RetrieveBankAccountBySINResponseDataAreaType" />
+            <xsd:element name="Fault" type="core:Fault" />
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RetrieveBankAccountBySINResponseDataAreaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="BankAccount">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="1" ref="cp:Transit" />
+                <xsd:element minOccurs="1" ref="cp:AccountNumber" />
+                <xsd:element minOccurs="1" ref="cp:Institution" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element ref="cp:ProcessingStatus" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PublishBankAccountBySINRequest" type="cp:PublishBankAccountBySINRequestType" />
+      <xsd:complexType name="PublishBankAccountBySINRequestType">
+        <xsd:sequence>
+          <xsd:element ref="core:MessageManifest" />
+          <xsd:element name="DataArea" type="cp:PublishBankAccountBySINRequestDataAreaType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PublishBankAccountBySINRequestDataAreaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="BankAccount">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="1" ref="cp:Transit" />
+                <xsd:element minOccurs="1" ref="cp:AccountNumber" />
+                <xsd:element minOccurs="1" ref="cp:Institution" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" ref="cp:SocialInsuranceNumber" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:BirthDate" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Surname" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Channel" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Program" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:SharingAgreementID" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PublishBankAccountBySINResponse" type="cp:PublishBankAccountBySINResponseType" />
+      <xsd:complexType name="PublishBankAccountBySINResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" ref="core:MessageManifest" />
+          <xsd:choice>
+            <xsd:element name="DataArea" type="cp:PublishBankAccountBySINResponseDataAreaType" />
+            <xsd:element name="Fault" type="core:Fault" />
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PublishBankAccountBySINResponseDataAreaType">
+        <xsd:sequence>
+          <xsd:element ref="cp:ProcessingStatus" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="SetBankAccountBySINRequest" type="cp:SetBankAccountBySINRequestType" />
+      <xsd:complexType name="SetBankAccountBySINRequestType">
+        <xsd:sequence>
+          <xsd:element ref="core:MessageManifest" />
+          <xsd:element name="DataArea" type="cp:SetBankAccountBySINRequestDataAreaType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SetBankAccountBySINRequestDataAreaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="BankAccount">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="1" ref="cp:Transit" />
+                <xsd:element minOccurs="1" ref="cp:AccountNumber" />
+                <xsd:element minOccurs="1" ref="cp:Institution" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element minOccurs="1" maxOccurs="1" ref="cp:SocialInsuranceNumber" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:BirthDate" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Surname" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Channel" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Program" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:SharingAgreementID" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="SetBankAccountBySINResponse" type="cp:SetBankAccountBySINResponseType" />
+      <xsd:complexType name="SetBankAccountBySINResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" ref="core:MessageManifest" />
+          <xsd:choice>
+            <xsd:element name="DataArea" type="cp:SetBankAccountBySINResponseDataAreaType" />
+            <xsd:element name="Fault" type="core:Fault" />
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SetBankAccountBySINResponseDataAreaType">
+        <xsd:sequence>
+          <xsd:element ref="cp:ProcessingStatus" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RetrieveClientStatusBySINRequest" type="cp:RetrieveClientStatusBySINRequestType" />
+      <xsd:complexType name="RetrieveClientStatusBySINRequestType">
+        <xsd:sequence>
+          <xsd:element ref="core:MessageManifest" />
+          <xsd:element name="DataArea" type="cp:RetrieveClientStatusBySINRequestDataAreaType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RetrieveClientStatusBySINRequestDataAreaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" ref="cp:SocialInsuranceNumber" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:BirthDate" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Surname" />
+          <xsd:element minOccurs="0" maxOccurs="1" ref="cp:Program" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="RetrieveClientStatusBySINResponse" type="cp:RetrieveClientStatusBySINResponseType" />
+      <xsd:complexType name="RetrieveClientStatusBySINResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" ref="core:MessageManifest" />
+          <xsd:choice>
+            <xsd:element name="DataArea" type="cp:RetrieveClientStatusBySINResponseDataAreaType" />
+            <xsd:element name="Fault" type="core:Fault" />
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RetrieveClientStatusBySINResponseDataAreaType">
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" ref="cp:ClientStatus" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="SharingAgreementID" type="cp:SharingAgreementIDST">
+        <xsd:annotation>
+          <xsd:documentation source="http://www.hr-xml.org" xml:lang="en">Birth Date The date on which
+        the associated person was born. Sometimes used as a "facet" identifier (one that taken with
+        other facts is used to identify a person). </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:simpleType name="SharingAgreementIDST">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="FormattedDateTimeType">
+        <xsd:annotation>
+          <xsd:documentation>This is formatted representation of a date, which may be specified as a
+        date, date/time, year, or year/month.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:union memberTypes="xsd:date xsd:dateTime xsd:gYearMonth xsd:gYear" />
+      </xsd:simpleType>
+      <xsd:simpleType name="SocialInsuranceNumberType">
+        <xsd:restriction base="xsd:string">
+          <xsd:whiteSpace value="collapse" />
+          <xsd:pattern value="[0-9]{9}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="SurnameType">
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:element name="BirthDate" type="cp:FormattedDateTimeType">
+        <xsd:annotation>
+          <xsd:documentation source="http://www.hr-xml.org" xml:lang="en">Birth Date The date on which
+        the associated person was born. Sometimes used as a "facet" identifier (one that taken with
+        other facts is used to identify a person). </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Transit" type="cp:TransitType" />
+      <xsd:simpleType name="TransitType">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9]{1,5}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="AccountNumber" type="cp:AccountNumberType" />
+      <xsd:simpleType name="AccountNumberType">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9]{1,12}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Institution" type="cp:InstitutionType" />
+      <xsd:simpleType name="InstitutionType">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9]{1,3}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="ClientStatus">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="InPay" />
+            <xsd:enumeration value="AnotherStatus" />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="SocialInsuranceNumber" type="cp:SocialInsuranceNumberType">
+        <xsd:annotation>
+          <xsd:documentation>Social Insurance Number. - maximum length 9 characters - minimum length 9
+        characters - no white spaces </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Surname" type="cp:SurnameType">
+        <xsd:annotation>
+          <xsd:documentation>Contains a non-given name. This is an inherited name or one representing a
+        family relationship or in some cultural contexts a "Place Name" (where someone is from). In
+        some cultural contexts, a single family name is typical, while in others there may be
+        multiple family names. A "primary" attribute may be used in the case where there are
+        multiple last names. A family name can have a "prefix," such as Von, De, Van, Al, etc. These
+        can be represented using the FamilyName "prefix" attribute. Not all implementers may find it
+        necessary to separate prefixes from the family name itself. Capturing the prefix and
+        FamilyName as discrete fields can become important when formatting or appearance may vary
+        based on context. For example, in some cultural contexts it may be common to use a blank
+        space as the delimiter between the prefix and the family name, while in others a hyphen
+        might be used. Separating the prefix from FamilyName allows such formatting requirements to
+        be handled flexibly. </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ResultCode">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Accepted" />
+            <xsd:enumeration value="Rejected" />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="RejectedCode">
+        <xsd:annotation>
+          <xsd:documentation>Identifies the reason why data was rejected</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10" />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ProcessingStatus" type="cp:ProcessingStatusType" />
+      <xsd:complexType name="ProcessingStatusType">
+        <xsd:sequence>
+          <xsd:element ref="cp:ResultCode" />
+          <xsd:element minOccurs="0" ref="cp:RejectedCode" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Channel" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Identifies the source of the business transaction. IE Online, Agent,
+        ...... </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Program" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Identifies a departmental program. CPP, EI, etc... </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:schema>
+    <xsd:schema xmlns:core="http://interoperability.gc.ca/core/1.0" elementFormDefault="qualified" targetNamespace="http://interoperability.gc.ca/core/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:complexType name="RequestMessage-NonTransactional-CT">
+        <xsd:sequence>
+          <xsd:element name="RequestMessageManifest" type="core:MessageManifest-NonTransactional-CT">
+            <xsd:annotation>
+              <xsd:documentation>Contains all metadata associated with a single request message</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="NotificationMessageCT">
+        <xsd:sequence>
+          <xsd:element name="NotificationMessageManifest" type="core:MessageManifest-NonTransactional-CT">
+            <xsd:annotation>
+              <xsd:documentation>Contains all metadata associated with a single notification message</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MessageManifest-NonTransactional-CT">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="MessageDateTime" type="core:DateTimeST">
+            <xsd:annotation>
+              <xsd:documentation>The date and time a specific message was sent for processed. This is a enterprise message system layer specific field and shold not be populated by the client.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="MessageID" type="core:NotificationIDCT">
+            <xsd:annotation>
+              <xsd:documentation>This field holds a unique identifier for a given message. This field is used to consistently identify messages between the enterprise messageing system and partners.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="SystemID" type="core:SystemIDCT">
+            <xsd:annotation>
+              <xsd:documentation>This value should contain a unique identifier for the partner submitting the Message. This name is identified in the Service Implementation Details agreement.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element default="false" name="TestIndicator" type="core:IndicatorST">
+            <xsd:annotation>
+              <xsd:documentation>This value indicates that the message was a test message. If the value is set to true the message will not be processed any further. Primarily used for conectivity testing.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="LanguageCode" type="core:LanguageCodeCT">
+            <xsd:annotation>
+              <xsd:documentation>This value should contain a unique language code.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Confidentiality" type="core:ConfidentialityST">
+            <xsd:annotation>
+              <xsd:documentation>This element indicates the Confidentiality of a message. Valid values are: P (Private), GC (GC Only)or NP (Not Private)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="ConfidentialityST">
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="Private" />
+          <xsd:enumeration value="Public" />
+          <xsd:enumeration value="GoC" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="MessageManifest" type="core:MessageManifest-Transactional-CT" />
+      <xsd:complexType name="MessageManifest-Transactional-CT">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" name="MessageDateTime" type="core:DateTimeST">
+            <xsd:annotation>
+              <xsd:documentation>The date and time a specific message was sent for processed. This is a enterprise message system layer specific field and shold not be populated by the client.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="MessageID" type="core:NotificationIDCT">
+            <xsd:annotation>
+              <xsd:documentation>This field holds a unique identifier for a given message. This field is used to consistently identify messages between the enterprise messageing system and partners.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="TechnicalTransactionDateTime" type="core:DateTimeST">
+            <xsd:annotation>
+              <xsd:documentation>The timestamp associated with a unique technical transaction instance of a message</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="TechnicalTransactionID" type="core:NotificationIDCT">
+            <xsd:annotation>
+              <xsd:documentation>A unique identifier (UUID format) representing a traceable instance of a technical transaction from the
+            originator across the entire life cycle of the transaction. This ID can be used to consistently 
+            trace a message across all hops of the transaction life cycle.
+          </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="BusinessTransactionDateTime" type="core:DateTimeST">
+            <xsd:annotation>
+              <xsd:documentation>The timestamp associated with a unique business transaction instance of a message
+          </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="BusinessTransactionID" type="core:NotificationIDCT">
+            <xsd:annotation>
+              <xsd:documentation>A unique identifier (UUID format) representing a traceable instance of a business transaction from 
+            the originator across the entire life cycle of the transaction. This ID is used to identify unique 
+            business transaction (Idempotence). It is primarily used to identify duplicate transactions.
+          </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="1" name="SystemID" type="core:SystemIDCT">
+            <xsd:annotation>
+              <xsd:documentation>This value should contain a unique identifier for the partner submitting the Message. This name is identified in the Service Implementation Details agreement.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" default="false" name="TestIndicator" type="core:IndicatorST">
+            <xsd:annotation>
+              <xsd:documentation>This value indicates that the message was a test message. If the value is set to true the message will not be processed any further. Primarily used for conectivity testing.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="LanguageCode" type="core:LanguageCodeCT">
+            <xsd:annotation>
+              <xsd:documentation>This value identifies the language which the message published in which in tun identifies what language a response is expected in.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="DateTimeST">
+        <xsd:annotation>
+          <xsd:documentation>ISO 8601 format: YYYY-MM-DDThh:mm:ss</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:dateTime" />
+      </xsd:simpleType>
+      <xsd:simpleType name="DateST">
+        <xsd:annotation>
+          <xsd:documentation>ISO 8601 format: YYYY-MM-DD</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:date" />
+      </xsd:simpleType>
+      <xsd:complexType name="NotificationIDCT">
+        <xsd:simpleContent>
+          <xsd:extension base="core:NotificationIDST" />
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="NotificationIDST">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="100" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="UUIDST">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">Universally Unique Identifier
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:length value="36" />
+          <xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="UUIDCT">
+        <xsd:simpleContent>
+          <xsd:extension base="core:UUIDST" />
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="LanguageCodeST">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="LanguageCodeCT">
+        <xsd:simpleContent>
+          <xsd:extension base="core:LanguageCodeST" />
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="SystemIDCT">
+        <xsd:simpleContent>
+          <xsd:extension base="core:SystemIDST" />
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:simpleType name="SystemIDST">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="IndicatorST">
+        <xsd:restriction base="xsd:boolean">
+          <xsd:pattern value="false" />
+          <xsd:pattern value="true" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Fault" type="core:Fault" />
+      <xsd:complexType name="Fault" final="extension">
+        <xsd:annotation>
+          <xsd:documentation>Fault reporting structure
+      </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="faultcode" type="xsd:QName" />
+          <xsd:element name="faultstring" type="xsd:string" />
+          <xsd:element minOccurs="0" name="faultactor" type="xsd:anyURI" />
+          <xsd:element minOccurs="0" name="detail" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConfirmationMessageCT">
+        <xsd:sequence>
+          <xsd:element name="Log" type="core:Log" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="LogItemSeverityCode">
+        <xsd:restriction base="xsd:token">
+          <xsd:length value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="LogItemNote">
+        <xsd:annotation>
+          <xsd:documentation xmlns:lang="EN">A short text for the log message
+         </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="200" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="LogItemTypeID">
+        <xsd:annotation>
+          <xsd:documentation xmlns:lang="EN">Unique identification of the type of a log entry
+         </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ProcessingResultCode">
+        <xsd:restriction base="xsd:token">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="2" />
+          <xsd:enumeration value="1" />
+          <xsd:enumeration value="2" />
+          <xsd:enumeration value="3" />
+          <xsd:enumeration value="4" />
+          <xsd:enumeration value="5" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="WebURI">
+        <xsd:restriction base="xsd:anyURI" />
+      </xsd:simpleType>
+      <xsd:simpleType name="LogItemCategoryCode">
+        <xsd:restriction base="xsd:token">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="15" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Log">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="ProcessingResultCode">
+            <xsd:annotation>
+              <xsd:documentation>The coded representation of the result of processing a given request.
+Codes:
+1 Recieved
+2 In Progress
+3 Successful
+4 Partially Successful
+5 Failed</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="core:ProcessingResultCode">
+                <xsd:enumeration value="1" />
+                <xsd:enumeration value="2" />
+                <xsd:enumeration value="3" />
+                <xsd:enumeration value="4" />
+                <xsd:enumeration value="5" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="MaximumLogItemSeverityCode">
+            <xsd:annotation>
+              <xsd:documentation>The coded representation of the maximum severity of a set of log items.
+Codes:
+1 Information
+2 Warning
+3 Error
+4 Abort</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="core:LogItemSeverityCode">
+                <xsd:enumeration value="1" />
+                <xsd:enumeration value="2" />
+                <xsd:enumeration value="3" />
+                <xsd:enumeration value="4" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Item" type="core:LogItem" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="LogItem">
+        <xsd:annotation>
+          <xsd:documentation xmlns:lang="EN" />
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="TypeID" type="core:LogItemTypeID">
+            <xsd:annotation>
+              <xsd:documentation>An identifier which decribes the type of logItem being created.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="CategoryCode" type="core:LogItemCategoryCode">
+            <xsd:annotation>
+              <xsd:documentation>A unique identifier for a given log message. This should refer to the actual issue which occurred which triggered the log message.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="SeverityCode">
+            <xsd:annotation>
+              <xsd:documentation>The coded representation of the severity of a log item.
+Codes:
+1 Information
+2 Warning
+3 Error
+4 Abort</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="core:LogItemSeverityCode">
+                <xsd:enumeration value="1" />
+                <xsd:enumeration value="2" />
+                <xsd:enumeration value="3" />
+                <xsd:enumeration value="4" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Note" type="core:LogItemNote">
+            <xsd:annotation>
+              <xsd:documentation>Generic data regarding the Log item which occurred</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="WebURI" type="core:WebURI">
+            <xsd:annotation>
+              <xsd:documentation>The digital address where more information regarding the error can be found.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </WL5G3N2:types>
+  <WL5G3N2:message name="PublishBankAccountBySINRequestMessage">
+    <WL5G3N2:part name="PublishBankAccountBySINRequest" element="WL5G3N3:PublishBankAccountBySINRequest" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="PublishBankAccountBySINResponseMessage">
+    <WL5G3N2:part name="PublishBankAccountBySINResponse" element="WL5G3N3:PublishBankAccountBySINResponse" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="Fault">
+    <WL5G3N2:part name="Fault" element="WL5G3N4:Fault" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="RetrieveBankAccountBySINRequestMessage">
+    <WL5G3N2:part name="RetrieveBankAccountBySINRequest" element="WL5G3N3:RetrieveBankAccountBySINRequest" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="RetrieveBankAccountBySINResponseMessage">
+    <WL5G3N2:part name="RetrieveBankAccountBySINResponse" element="WL5G3N3:RetrieveBankAccountBySINResponse" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="RetrieveBankAccountBySIRequestMessage">
+    <WL5G3N2:part name="RetrieveBankAccountBySIN" element="WL5G3N3:RetrieveBankAccountBySINRequest" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="RetrieveClientStatusBySINRequestMessage">
+    <WL5G3N2:part name="RetrieveClientStatusBySIN" element="WL5G3N3:RetrieveClientStatusBySINRequest" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="SetBankAccountBySINRequestMessage">
+    <WL5G3N2:part name="SetBankAccountBySIN" element="WL5G3N3:SetBankAccountBySINRequest" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="PublishBankAccountBySINResponseCallbackMessage">
+    <WL5G3N2:part name="PublishBankAccountBySINResponse" element="WL5G3N3:PublishBankAccountBySINResponse" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="RetrieveBankAccountBySINResponseCallbackMessage">
+    <WL5G3N2:part name="RetrieveBankAccountBySINResponse" element="WL5G3N3:RetrieveBankAccountBySINResponse" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="RetrieveClientStatusBySINResponseCallbackMessage">
+    <WL5G3N2:part name="RetrieveClientStatusBySINResponseResponse" element="WL5G3N3:RetrieveClientStatusBySINResponse" />
+  </WL5G3N2:message>
+  <WL5G3N2:message name="SetBankAccountBySINResponseCallbackMessage">
+    <WL5G3N2:part name="SetBankAccountBySINResponse" element="WL5G3N3:SetBankAccountBySINResponse" />
+  </WL5G3N2:message>
+  <WL5G3N2:portType name="execute_sync_ptt">
+    <WL5G3N2:operation name="PublishBankAccountBySIN">
+      <WL5G3N2:input message="WL5G3N5:PublishBankAccountBySINRequestMessage" />
+      <WL5G3N2:output message="WL5G3N5:PublishBankAccountBySINResponseMessage" />
+      <WL5G3N2:fault name="GenericFault" message="WL5G3N5:Fault" />
+      <WL5G3N2:fault name="InvalidCredentials" message="WL5G3N5:Fault" />
+      <WL5G3N2:fault name="InvalidPayload" message="WL5G3N5:Fault" />
+    </WL5G3N2:operation>
+    <WL5G3N2:operation name="RetrieveBankAccountBySIN">
+      <WL5G3N2:input message="WL5G3N5:RetrieveBankAccountBySINRequestMessage" />
+      <WL5G3N2:output message="WL5G3N5:RetrieveBankAccountBySINResponseMessage" />
+      <WL5G3N2:fault name="GenericFault" message="WL5G3N5:Fault" />
+      <WL5G3N2:fault name="InvalidCredentials" message="WL5G3N5:Fault" />
+      <WL5G3N2:fault name="InvalidPayload" message="WL5G3N5:Fault" />
+    </WL5G3N2:operation>
+  </WL5G3N2:portType>
+  <WL5G3N2:binding name="execute_sync_pttBinding" type="WL5G3N5:execute_sync_ptt">
+    <WL5G3N6:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <WL5G3N0:Policy>
+      <WL5G3N0:PolicyReference URI="#wss_username_token_service_policy" />
+    </WL5G3N0:Policy>
+    <WL5G3N2:operation name="PublishBankAccountBySIN">
+      <WL5G3N6:operation soapAction="http://interoperability.gc.ca/service/citizenprofile/1.0/PublishBankAccountBySIN" style="document" />
+      <WL5G3N2:input>
+        <WL5G3N6:body use="literal" parts="PublishBankAccountBySINRequest" />
+      </WL5G3N2:input>
+      <WL5G3N2:output>
+        <WL5G3N6:body use="literal" parts="PublishBankAccountBySINResponse" />
+      </WL5G3N2:output>
+      <WL5G3N2:fault name="GenericFault">
+        <WL5G3N6:fault use="literal" name="GenericFault" namespace="" />
+      </WL5G3N2:fault>
+      <WL5G3N2:fault name="InvalidCredentials">
+        <WL5G3N6:fault use="literal" name="InvalidCredentials" namespace="" />
+      </WL5G3N2:fault>
+      <WL5G3N2:fault name="InvalidPayload">
+        <WL5G3N6:fault use="literal" name="InvalidPayload" namespace="" />
+      </WL5G3N2:fault>
+    </WL5G3N2:operation>
+    <WL5G3N2:operation name="RetrieveBankAccountBySIN">
+      <WL5G3N6:operation soapAction="http://interoperability.gc.ca/service/citizenprofile/1.0/RetrieveBankAccountBySIN" style="document" />
+      <WL5G3N2:input>
+        <WL5G3N6:body use="literal" parts="RetrieveBankAccountBySINRequest" />
+      </WL5G3N2:input>
+      <WL5G3N2:output>
+        <WL5G3N6:body use="literal" parts="RetrieveBankAccountBySINResponse" />
+      </WL5G3N2:output>
+      <WL5G3N2:fault name="GenericFault">
+        <WL5G3N6:fault use="literal" name="GenericFault" namespace="" />
+      </WL5G3N2:fault>
+      <WL5G3N2:fault name="InvalidCredentials">
+        <WL5G3N6:fault use="literal" name="InvalidCredentials" namespace="" />
+      </WL5G3N2:fault>
+      <WL5G3N2:fault name="InvalidPayload">
+        <WL5G3N6:fault use="literal" name="InvalidPayload" namespace="" />
+      </WL5G3N2:fault>
+    </WL5G3N2:operation>
+  </WL5G3N2:binding>
+  <WL5G3N2:service name="execute_sync_pttBindingQSService">
+    <WL5G3N2:documentation>OSB Service</WL5G3N2:documentation>
+    <WL5G3N2:port name="execute_sync_pttBindingQSPort" binding="WL5G3N5:execute_sync_pttBinding">
+      <WL5G3N6:address location="http://devfabm.brz.dev:7031/SNDBX12C1/INST1/CPFL/CPFLInboundProxy/CPFLSyncInboundRequest" />
+    </WL5G3N2:port>
+  </WL5G3N2:service>
+</WL5G3N2:definitions>
